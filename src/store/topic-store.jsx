@@ -9,12 +9,11 @@ module.exports = Reflux.createStore({
     return Api.get('topics/defaults')
     .then(function(json) {
       this.topics = json.data;
-      // this.triggerChange();
-      this.trigger('change', this.topics);
+      this.triggerChange();
+      // this.trigger('change', this.topics);
     }.bind(this));
+  },
+  triggerChange: function(){
+    this.trigger('change', this.topics);
   }
-  // },
-  // triggerChange: function(){
-  //   this.trigger('change', this.topics);
-  // }
 });
