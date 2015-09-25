@@ -9,12 +9,12 @@ module.exports = React.createClass({
   mixins: [
     Reflux.listenTo(TopicStore, 'onChange')
   ],
-  getInitialState: function(){
+  getInitialState: function() {
     return {
       topics: []
     }
   },
-  componentWillMount: function(){
+  componentWillMount: function() {
     Actions.getTopics();
   },
   render: function() {
@@ -22,15 +22,15 @@ module.exports = React.createClass({
       {this.renderTopics()}
     </div>
   },
-  renderTopics: function(){
-    return this.state.topics.slice(0,4).map(function(topic){
+  renderTopics: function() {
+    return this.state.topics.slice(0, 4).map(function(topic){
       return <Link to={"topics/" + topic.id} className="list-group-item" key={topic.id}>
         <h4>{topic.name}</h4>
         <p>{topic.description}</p>
       </Link>
     });
   },
-  onChange: function(event, topics){
+  onChange: function(event, topics) {
     this.setState({topics: topics});
   }
 });

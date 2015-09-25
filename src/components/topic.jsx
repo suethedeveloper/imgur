@@ -2,6 +2,7 @@ var React = require('react');
 var Actions = require('../actions');
 var ImageStore = require('../store/image-store');
 var Reflux = require('reflux');
+var ImagePreview = require('./image-preview');
 
 module.exports = React.createClass({
   mixins: [
@@ -12,17 +13,21 @@ module.exports = React.createClass({
       images: []
     }
   },
-  componentWillMount: function(){
+  componentWillMount: function() {
     Actions.getImages(this.props.params.id);
   },
   componentWillReceiveProps: function(nextProps){
     Actions.getImages(nextProps.params.id);
   },
   render: function(){
-    return <div>
-      // I am a topic with ID {this.props.params.id}
-
+    return <div className="topic">
+      {this.renderImages()}
     </div>
+  },
+  renderImages: function() {
+    return this.state.images.slice(0, 20).map(function(image) {
+      return <ImagePreview key={image.id} {...image} />
+    });
   },
   onChange: function(event, images) {
     this.setState({images: images})

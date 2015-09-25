@@ -9,15 +9,15 @@ module.exports = React.createClass({
   mixins: [
     Reflux.listenTo(TopicStore, 'onChange')
   ],
-  getInitialState: function(){
+  getInitialState: function() {
     return {
       topics: []
     }
   },
-  componentWillMount: function(){
+  componentWillMount: function() {
     Actions.getTopics();
   },
-  render: function(){
+  render: function() {
     return <nav className="navbar navbar-default header">
       <div className="container-fluid">
         <Link to="/" className="navbar-brand">
@@ -29,8 +29,8 @@ module.exports = React.createClass({
       </div>
     </nav>
   },
-  renderTopics: function(){
-    return this.state.topics.slice(0,4).map(function(topic){
+  renderTopics: function() {
+    return this.state.topics.slice(0, 4).map(function(topic){
       return <li key={topic.id}>
         <Link activeClassName="active" to={"topics/" + topic.id}>
           {topic.name}
